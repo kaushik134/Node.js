@@ -41,3 +41,24 @@ const content = "how are you"
 //         console.log("data")
 //     }
 // })
+
+
+
+// renamefile 
+// fs.rename("write2.txt","write1.txt",(err)=>{
+//     if(err){
+//         console.log(err)
+//     }else{
+//         console.log("Rename Successfully")
+//     }
+// })
+
+
+// delete file
+fs.unlink("write1.txt",(err)=>{
+    if(err){
+        console.log(err)
+    }else{
+        console.log("delete successfully")
+    }
+})
