@@ -6,7 +6,7 @@ const PORT = 3030
 app.get("/",(req,res)=>{   
     res.sendFile(__dirname+ "/index.html")
 })
-app.get("/login",(req,res)=>{
+app.post("/login",(req,res)=>{
     const request = req.body;
     console.log("Data post ",request)
 })
