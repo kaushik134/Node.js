@@ -7,7 +7,7 @@ login.get("/",(req,res)=>{
     const name = req.body.name
     const pwd = req.body.pwd
     if(name=="admin"&&pwd=="admin123"){
-        const token = jwt.sign({name:name,pwd:pwd},"skill",{expiresIn:"1h"})
+        const token = jwt.sign({name:name,pwd:pwd},"skill",{expiresIn:"1m"})
         tokenObjct.token=token
         res.json({name:name,pwd:pwd,token:token})
     }else{
