@@ -10,7 +10,7 @@ getdata.get("/",(req,res)=>{
         if(err) throw err
         else{
             const db = connection.db("books")
-            db.collection("books").find().toArray((err,arr)=>{
+            db.collection("books").find({"isbn":9988}).toArray((err,arr)=>{
                 console.log(arr);
                 res.send(arr)
             })
