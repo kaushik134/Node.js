@@ -2,6 +2,9 @@ const express = require("express")
 const app = express()
 const port=3030
 
+app.use(express.json())
+app.use(express.urlencoded())
+
 app.get("/",(req,res)=>{
     res.json({msg:"inside server"})
 })
