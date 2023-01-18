@@ -17,7 +17,7 @@ app.use(express.urlencoded())
 //     console.log("inside server");
 // })
 
-mongoose.connect("mongodb+srv://admin:admin@cluster0.gx72wkp.mongodb.net/books?retryWrites=true&w=majority/books",{
+mongoose.connect("mongodb+srv://admin:admin@cluster0.gx72wkp.mongodb.net/?retryWrites=true&w=majority",{
     useNewUrlParser:true,
     useUnifiedTopology:true,
 })
@@ -30,6 +30,34 @@ app.post("/insert",(req,res)=>{
     console.log(data.users);
     const result = User.insertMany(data.users)
     res.send(result)
+})
+
+app.get("/getdata",(req,res)=>{
+    User.find({},(err,result)=>{
+        if(err) throw err
+        else{
+            console.log(result);
+            res.send(result);
+        }
+    })
+})
+
+app.put("/putdata",(req,res)=>{
+    User.updateOne({"name":"kaushik1"},{$set:{"email":"kaushik123@gmail.com"}},(err,result)=>{
+        if(err) throw err
+        else{
+            res.send(result)
+        }
+    })
+})
+
+app.delete("/deletedata",(req,res)=>{
+    User.deleteOne({"name":"kaushik"},(err,result)=>{
+        if(err) throw err
+        else{
+            res.send(result)
+        }
+    })
 })
 
 app.listen(port,()=>{
