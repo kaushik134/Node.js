@@ -12,7 +12,7 @@ const login = require("./Login/login")
 app.use("/login",login)
 
 const module1 = require("./Module1/module1")
-app.use("/module1",module1)
+app.use("/module",module1)
 
 app.listen(port,()=>{
     console.log(`server ${port}`);

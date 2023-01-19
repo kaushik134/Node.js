@@ -1,6 +1,6 @@
-const monogoose = require("mongoose")
+const mongoose = require("mongoose")
 
-const UserSchema = new monogoose.Schema({
+const UserSchema = new mongoose.Schema({
     id:{type:String,required:true},
     name:{type:String,required:true},
     email:{type:String,required:true},
@@ -14,6 +14,20 @@ const UserSchema = new monogoose.Schema({
     isAdmin:{type:Boolean,required:true},
 })
 
-const user = monogoose.model("Users",UserSchema)
+const user = mongoose.model("Users",UserSchema)
 
 module.exports=user
+
+/* 
+"id" : "1234",
+"name" : "kaushik",
+"email" : "kaushikvaghasiya12@gmail.com",
+"password" : "kaushik12",
+"street" : "605, surbhi the royal town",
+"apartment" : "passodara patiya , kamrej road",
+"city" : "surat",
+"zip" : "394185",
+"country" : "india",
+"phone" : 635125194,
+"isAdmin" : true
+*/

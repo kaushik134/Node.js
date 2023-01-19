@@ -1,6 +1,6 @@
-const monogoose = require("mongoose")
+const mongoose = require("mongoose")
 
-const OrdersSchema = new monogoose.Schema({
+const OrdersSchema = new mongoose.Schema({
     id:{type:String,required:true},
     orderitems:{type:Array,required:true},
     shippingAddress1:{type:String,required:true},
@@ -15,6 +15,6 @@ const OrdersSchema = new monogoose.Schema({
     dateOrdered:{type:Date,required:true},
 })
 
-const order = monogoose.model("Orders",OrdersSchema)
+const order = mongoose.model("Orders",OrdersSchema)
 
 module.exports=order

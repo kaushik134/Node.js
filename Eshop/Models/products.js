@@ -1,6 +1,6 @@
-const monogoose = require("mongoose")
+const mongoose = require("mongoose")
 
-const ProductSchema = new monogoose.Schema({
+const ProductSchema = new mongoose.Schema({
     id:{type:String,required:true},
     name:{type:String,required:true},
     description:{type:String,required:true},
@@ -16,6 +16,6 @@ const ProductSchema = new monogoose.Schema({
     dateOrdered:{type:Date,required:true},
 })
 
-const products = monogoose.model("Products",ProductSchema)
+const products = mongoose.model("Products",ProductSchema)
 
 module.exports=products
