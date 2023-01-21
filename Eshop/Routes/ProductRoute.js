@@ -39,7 +39,6 @@ route.post("/insert", async (req, res) => {
         countstock: req.body.countstock,
         ratting: req.body.ratting,
         isFeatured: req.body.isFeatured,
-        dateOrdered: req.body.dateOrdered,
     })
     res.send(products)
     products = await products.save()
