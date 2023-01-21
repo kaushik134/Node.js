@@ -38,6 +38,12 @@ app.use("/Category",categoryroute)
 const productroute = require("./Routes/ProductRoute")
 app.use("/Product",productroute)
 
+const orderroute = require("./Routes/OrdersRoute")
+app.use("/Order",orderroute)
+
+const orderitemroute = require("./Routes/OrderItemsRoute")
+app.use("/OrderItem",orderitemroute)
+
 const PORT = process.env.PORT
 app.listen(PORT,()=>{
     console.log(`server ${PORT}`);
