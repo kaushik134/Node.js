@@ -14,6 +14,7 @@ app.use(express.json())
 app.use(express.urlencoded())
 app.use(morgan("tiny"))
 
+mongoose.pluralize(null)
 
 mongoose.connect(process.env.CONNECTION_STRING,{
     useNewUrlParser:true,
@@ -30,6 +31,12 @@ app.get("/",(req,res)=>{
 
 const userroute = require("./Routes/UserRoute")
 app.use("/UserRoute",userroute)
+
+const categoryroute = require("./Routes/CategoryRoute")
+app.use("/Category",categoryroute)
+
+const productroute = require("./Routes/ProductRoute")
+app.use("/Product",productroute)
 
 const PORT = process.env.PORT
 app.listen(PORT,()=>{

@@ -1,13 +1,14 @@
 const express = require("express")
 const mongoose = require("mongoose")
-Users=express.Router()
+route=express.Router()
 
-Users.use(express.json())
-Users.use(express.urlencoded())
+route.use(express.json())
+route.use(express.urlencoded())
 
 const user = require("../Models/User")
 
-Users.post("/insert",(req,res)=>{
+/*
+route.post("/insert",(req,res)=>{
     user.insertMany(req.body,(err,result)=>{
         if(err) throw err
         else{
@@ -16,8 +17,28 @@ Users.post("/insert",(req,res)=>{
         }
     })
 })
+*/
 
-Users.get("/find",(req,res)=>{
+route.post("/insert",async(req,res)=>{
+    let users = new user({
+    id : req.body.id,
+    name : req.body.name,
+    email : req.body.email,
+    password : req.body.password,
+    street : req.body.street,
+    apartment : req.body.apartment,
+    city : req.body.city,
+    zip : req.body.zip,
+    country : req.body.country,
+    phone : req.body.phone,
+    isAdmin : req.body.isAdmin,
+    })
+    res.send(users)
+    users = await users.save()
+    if(!users) return res.status(500).send("the user cannot be created")
+})
+
+route.get("/find",(req,res)=>{
     user.find({},(err,result)=>{
         if(err) throw err
         else{
@@ -26,4 +47,4 @@ Users.get("/find",(req,res)=>{
     })
 })
 
-module.exports=Users
+module.exports=route

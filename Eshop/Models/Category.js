@@ -11,3 +11,11 @@ const CategorySchema = new mongoose.Schema({
 const Category = mongoose.model("Category",CategorySchema)
 
 module.exports=Category
+
+/*
+"id":"1234",
+"name":"abc",
+"color":"red",
+"icon":"icon1",
+"image":"img1"
+*/
