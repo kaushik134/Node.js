@@ -3,8 +3,8 @@ postdata = express.Router();
 
 const mongodb = require("mongodb");
 const mongoClient = mongodb.MongoClient;
-const url = "mongodb+srv://admin:admin@cluster0.gx72wkp.mongodb.net/?retryWrites=true&w=majority"
-// const url = "mongodb://localhost:27017"
+// const url = "mongodb+srv://admin:admin@cluster0.gx72wkp.mongodb.net/?retryWrites=true&w=majority"
+const url = "mongodb://localhost:27017"
 
 postdata.post("/", (req, res) => {
     mongoClient.connect(url, (err, connection) => {

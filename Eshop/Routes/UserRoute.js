@@ -33,9 +33,12 @@ route.post("/insert",async(req,res)=>{
     phone : req.body.phone,
     isAdmin : req.body.isAdmin,
     })
-    res.send(users)
+    
     users = await users.save()
     if(!users) return res.status(500).send("the user cannot be created")
+    else{
+        res.send(users)
+    }
 })
 
 route.get("/find",(req,res)=>{
