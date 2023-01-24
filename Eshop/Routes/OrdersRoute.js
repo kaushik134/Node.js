@@ -16,6 +16,7 @@ route.post("/insert", async (req, res) => {
                 product: orderitem.product,
             })
             newOrderItem = await newOrderItem.save()
+            console.log(newOrderItem);
             return newOrderItem._id
         })
     )
@@ -28,6 +29,7 @@ route.post("/insert", async (req, res) => {
                 "price"
             )
             const totalPrice = orderItem.product.price * orderItem.quantity
+            console.log(totalPrice);
             return totalPrice
         })
     )
@@ -45,9 +47,9 @@ route.post("/insert", async (req, res) => {
         totalprice: totalPrice,
         user: req.body.user,
     })
-    order = await order.save()
     if (!order) return res.status(500).send("order cannot be created")
     else {
+        order = await order.save()
         res.send(order)
     }
 })
