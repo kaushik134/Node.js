@@ -8,29 +8,48 @@ route.use(express.urlencoded())
 const orders = require("../Models/Orders")
 const orderitems = require("../Models/orderitems")
 
-route.post("/insert",async(req,res)=>{
-    const orderItemId = await Promise.all()
+route.post("/insert", async (req, res) => {
+    const orderItemId = await Promise.all(
+        req.body.orderitems.map(async (orderitem) => {
+            let newOrderItem = new orderitems({
+                quantity: orderitem.quantity,
+                product: orderitem.product,
+            })
+            newOrderItem = await newOrderItem.save()
+            return newOrderItem._id
+        })
+    )
 
+    const orderItemsIdsResolved = await orderItemId
+    const totalPrices = await Promise.all(
+        orderItemsIdsResolved.map(async (orderItemIds) => {
+            const orderItem = await orderitems.findById(orderItemIds).populate(
+                "product",
+                "price"
+            )
+            const totalPrice = orderItem.product.price * orderItem.quantity
+            return totalPrice
+        })
+    )
 
-
-
-
+    const totalPrice = totalPrices.reduce((a, b) => a + b, 0)
     let order = new orders({
-    id : req.body.id,
-    orderitems : req.body.orderitems,
-    shippingAddress1 : req.body.shippingAddress1,
-    shippingAddress2 : req.body.shippingAddress2,
-    city : req.body.city,
-    zip : req.body.zip,
-    country : req.body.country,
-    phone : req.body.phone,
-    status : req.body.status,
-    totalprice : req.body.totalprice,
-    user : req.body.user,
+        orderitems: orderItemsIdsResolved,
+        shippingAddress1: req.body.shippingAddress1,
+        shippingAddress2: req.body.shippingAddress2,
+        city: req.body.city,
+        zip: req.body.zip,
+        country: req.body.country,
+        phone: req.body.phone,
+        status: req.body.status,
+        totalprice: totalPrice,
+        user: req.body.user,
     })
-    res.send(order)
     order = await order.save()
-    if(!order) return res.status(500).send("order cannot be created")
+    if (!order) return res.status(500).send("order cannot be created")
+    else {
+        res.send(order)
+    }
 })
 
-module.exports=route
+module.exports = route
