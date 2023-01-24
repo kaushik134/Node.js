@@ -1,20 +1,21 @@
 const mongoose = require("mongoose")
 
 const OrdersSchema = new mongoose.Schema({
-    orderitems:
-    {
-        type:Array,
-        required:true
-    },
+    orderitems:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Orderitems",
+            required:true
+        },
+    ],
     shippingAddress1:
     {
         type:String,
         required:true
     },
-    shippingAddress1:
+    shippingAddress2:
     {
-        type:String,
-        required:true
+        type:String
     },
     city:
     {
@@ -39,7 +40,8 @@ const OrdersSchema = new mongoose.Schema({
     status:
     {
         type:String,
-        required:true
+        required:true,
+        default:"pending"
     },
     totalprice:
     {
@@ -70,3 +72,25 @@ OrdersSchema.set("toJSON",{
 const order = mongoose.model("Orders",OrdersSchema)
 
 module.exports=order
+
+/*
+{
+    "orderitems" :[
+        {
+            "quantity":3,
+            "product":"63ca87c8ee97daa1460bf442"
+        },
+        {
+            "quantity":2,
+            "product":"63ca8b80a877b8dbfe56dcd5"
+        },
+    ], 
+    "shippingAddress1" :"surat", 
+    "shippingAddress2" :"surat", 
+    "city" :"surat", 
+    "zip" :"395001", 
+    "country" :"india", 
+    "phone" :6353125194,
+    "user" :"63ca856b9b2a7c198c7ab1c6", 
+}
+*/
