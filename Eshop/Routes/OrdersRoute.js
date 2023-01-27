@@ -7,7 +7,6 @@ route.use(express.urlencoded())
 
 const orders = require("../Models/Orders")
 const orderitems = require("../Models/orderitems")
-const order = require("../Models/Orders")
 
 route.post("/insert", async (req, res) => {
     const orderItemId = await Promise.all(
@@ -58,7 +57,23 @@ route.post("/insert", async (req, res) => {
 })
 
 route.get("/find",async(req,res)=>{
-    const orderList = await order.find().populate("user","name").sort({dateOrdered : -1})
+    const orderList = await orders.find().populate("user","name").sort({dateOrdered : -1})
+    if(!orderList){
+        res.status(500).send("failed")
+    }
+    else{
+        res.send(orderList)
+    }
+})
+
+route.get("/:id",async(req,res)=>{
+    const orderList = await orders.findById(req.params.id).populate("user","name").populate({
+        path:"orderitems",
+        populate:{
+            path:"product",
+            populate:"category"
+        }
+    })
     if(!orderList){
         res.status(500).send("failed")
     }

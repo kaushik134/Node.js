@@ -14,7 +14,7 @@ mongoose.set("strictQuery",true)
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(morgan("tiny"))
-app.use(authJwt)
+// app.use(authJwt)
 
 mongoose.pluralize(null)
 
