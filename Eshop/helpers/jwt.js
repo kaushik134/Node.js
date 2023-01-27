@@ -5,7 +5,7 @@ function authJwt(){
     return expressJWT({
         secret,
         algorithms:["HS256"],
-        isRevoked:isRevoked,
+        isRevoked:isRevoked
     })
 }
 

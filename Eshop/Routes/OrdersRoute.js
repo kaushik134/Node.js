@@ -7,6 +7,7 @@ route.use(express.urlencoded())
 
 const orders = require("../Models/Orders")
 const orderitems = require("../Models/orderitems")
+const order = require("../Models/Orders")
 
 route.post("/insert", async (req, res) => {
     const orderItemId = await Promise.all(
@@ -28,11 +29,13 @@ route.post("/insert", async (req, res) => {
                 "product",
                 "price"
             )
+            console.log(orderItem);
             const totalPrice = orderItem.product.price * orderItem.quantity
             console.log(totalPrice);
             return totalPrice
         })
     )
+    console.log(totalPrices);
 
     const totalPrice = totalPrices.reduce((a, b) => a + b, 0)
     let order = new orders({
@@ -51,6 +54,16 @@ route.post("/insert", async (req, res) => {
     else {
         order = await order.save()
         res.send(order)
+    }
+})
+
+route.get("/find",async(req,res)=>{
+    const orderList = await order.find().populate("user","name").sort({dateOrdered : -1})
+    if(!orderList){
+        res.status(500).send("failed")
+    }
+    else{
+        res.send(orderList)
     }
 })
 
