@@ -47,11 +47,11 @@ route.post("/insert", async (req, res) => {
 route.post("/login", async (req, res) => {
     const User = await user.findOne({ email: req.body.email })
     const secret = process.env.secret
-    console.log(secret);
     if (!User) {
         return res.status(500).send("The user not found")
     }
-    if (User && bcrypt.compare(req.body.password, User.password)) {
+    if (User && bcrypt.compareSync(req.body.password, User.password)) {
+        console.log(User.password);
         const token = jwt.sign({
             userId: User.id,
             isAdmin: User.isAdmin,
@@ -61,7 +61,7 @@ route.post("/login", async (req, res) => {
                 expiresIn: "1h"
             }
         )
-        res.status(200).send({ user: User.email, token: token })
+        res.status(200).send({ email: User.email, token: token })
     }
     else {
         res.status(500).send("password is not valid")

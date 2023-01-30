@@ -1,12 +1,16 @@
-const expressJWT = require("express-jwt")
-function authJwt(){
+const {expressjwt:jwt } = require("express-jwt")
+function express_jwt(){
     const secret = process.env.secret
-    const api = process.env.API_URL
-    return expressJWT({
+    return jwt({
         secret,
         algorithms:["HS256"],
-        isRevoked:isRevoked
-    })
+    }).unless({
+        path: [
+          { url: "/Category", methods: ["GET", "OPTIONS"] },
+          `/UserRoute/login`,
+          `/UserRoute/insert`,
+        ],
+      });
 }
 
-module.exports=authJwt
+module.exports=express_jwt

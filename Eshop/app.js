@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 require("dotenv/config")
 const authJwt = require("./helpers/jwt")
+const errhelper = require("./helpers/helper")
 
 app.use(cors())
 app.options("*",cors())
@@ -14,7 +15,8 @@ mongoose.set("strictQuery",true)
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(morgan("tiny"))
-// app.use(authJwt)
+app.use(authJwt())
+app.use(errhelper)
 
 mongoose.pluralize(null)
 
