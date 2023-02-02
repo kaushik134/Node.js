@@ -14,13 +14,7 @@ const OrdersItemsSchema = new mongoose.Schema({
     },
 })
 
-OrdersItemsSchema.virtual("id").get(function(){
-    return this._id.toHexString()
-})
 
-OrdersItemsSchema.set("toJSON",{
-    virtuals:true
-})
 
 const orderitems = mongoose.model("Orderitems",OrdersItemsSchema)
 

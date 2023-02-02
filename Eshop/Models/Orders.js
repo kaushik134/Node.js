@@ -61,13 +61,7 @@ const OrdersSchema = new mongoose.Schema({
     },
 })
 
-OrdersSchema.virtual("id").get(function (){
-    return this._id.toHexString()
-})
 
-OrdersSchema.set("toJSON",{
-    virtuals:true
-})
 
 const order = mongoose.model("Orders",OrdersSchema)
 

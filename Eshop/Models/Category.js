@@ -23,13 +23,7 @@ const CategorySchema = new mongoose.Schema({
     },
 })
 
-CategorySchema.virtual("id").get(function(){
-    return this._id.toHexString()
-})
 
-CategorySchema.set("toJSON",{
-    virtuals:true
-})
 
 const Category = mongoose.model("Category",CategorySchema)
 
