@@ -77,12 +77,11 @@ route.get("/find", (req, res) => {
     })
 })
 
-route.get("/:id", async (req, res) => {
-    const User = await user.findById(req.params.id)
-
-    if (!User) return res.status(500).send("The user with the given ID was not found")
-    else {
-        res.send(User)
+route.get("/:id",async(req,res)=>{
+    const users = await user.findById(req.params.id)
+    if(!users) return res.status(500).send("user not found")
+    else{
+        res.send(users)
     }
 })
 
