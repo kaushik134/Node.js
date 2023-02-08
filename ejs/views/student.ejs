@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" value="<%=studentId%>"><br>
+    <input type="text" value="<%=studentName%>"><br>
+    <input type="text" value="<%=studentMarks%>"><br>
+    <label for="">Results: </label>
+    <%if(studentMarks>=35){%>
+        pass
+        <%}else{%>}
+            Fail
+            <%}%>
+                <%for(let i=0;i<subject.length;i++){%>
+                    <li>
+                        <%=subject[i].name%>:<%=subject[i].marks%>
+                    </li>
+                    <%}%>
+
+</body>
+
+</html>
